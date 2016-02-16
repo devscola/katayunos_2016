@@ -8,8 +8,8 @@ class Player
   end
 
   def win_ball
-    (@score = 40 and return) if @score == 30
     @score += 15
+    @score = 40 if @score > 40
   end
 end
 
