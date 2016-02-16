@@ -12,6 +12,7 @@ class Player
   end
 
   def win_ball
+    (@score = "WON" and return) if @score == MAX_POINTS
     @score += POINTS_INCREMENT
     @score = MAX_POINTS if @score > MAX_POINTS
   end
@@ -37,5 +38,10 @@ describe "Tennis game" do
   it "player wins three balls" do
     3.times { player.win_ball }
     expect(player.score).to eq(40)
+  end
+
+  it "player wins the game" do
+    4.times { player.win_ball }
+    expect(player.score).to eq("WON")
   end
 end
