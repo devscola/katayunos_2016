@@ -18,33 +18,24 @@ class Player
 end
 
 describe "Tennis game" do
+  subject(:player) { Player.new }
+
   it "initial player score" do
-    player = Player.new
-    player_score = player.score
-    expect(player_score).to eq(0)
+    expect(player.score).to eq(0)
   end
 
   it "player wins one ball" do
-    player = Player.new
     player.win_ball
-    player_score = player.score
-    expect(player_score).to eq(15)
+    expect(player.score).to eq(15)
   end
 
   it "player wins two balls" do
-    player = Player.new
-    player.win_ball
-    player.win_ball
-    player_score = player.score
-    expect(player_score).to eq(30)
+    2.times { player.win_ball }
+    expect(player.score).to eq(30)
   end
 
   it "player wins three balls" do
-    player = Player.new
-    player.win_ball
-    player.win_ball
-    player.win_ball
-    player_score = player.score
-    expect(player_score).to eq(40)
+    3.times { player.win_ball }
+    expect(player.score).to eq(40)
   end
 end
