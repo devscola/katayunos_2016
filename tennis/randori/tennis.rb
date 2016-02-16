@@ -1,6 +1,10 @@
 class Player
+  INITIAL_POINTS = 0
+  POINTS_INCREMENT = 15
+  MAX_POINTS = 40
+
   def initialize
-    @score = 0
+    @score = INITIAL_POINTS
   end
 
   def score
@@ -8,8 +12,8 @@ class Player
   end
 
   def win_ball
-    @score += 15
-    @score = 40 if @score > 40
+    @score += POINTS_INCREMENT
+    @score = MAX_POINTS if @score > MAX_POINTS
   end
 end
 
