@@ -1,18 +1,28 @@
-class Player
+class Score
   USUAL_SCORES = ["0", "15", "30", "40", "WON"]
   PECULIAR_SCORES = ["love", "fifteen", "thirty", "forty", "WON"]
 
+  def initialize(scoring_system=:usual)
+    @scoring_system = scoring_system
+  end
+
+  def value(won_balls)
+    return PECULIAR_SCORES[won_balls] if @scoring_system == :peculiar
+    USUAL_SCORES[won_balls]
+  end
+end
+
+class Player
   INITIAL_WON_BALLS = 0
   WON_BALL_INCREMENT = 1
 
   def initialize(scoring_system=:usual)
     @won_balls = INITIAL_WON_BALLS
-    @scoring_system = scoring_system
+    @score = Score.new(scoring_system)
   end
 
   def score
-    return PECULIAR_SCORES[@won_balls] if @scoring_system == :peculiar
-    USUAL_SCORES[@won_balls]
+    @score.value(@won_balls)
   end
 
   def win_ball
