@@ -1,14 +1,18 @@
 class Player
-  SCORES = [0, 15, 30, 40, "WON"]
+  USUAL_SCORES = ["0", "15", "30", "40", "WON"]
+  PECULIAR_SCORES = ["love", "fifteen", "thirty", "forty", "WON"]
+
   INITIAL_WON_BALLS = 0
   WON_BALL_INCREMENT = 1
 
-  def initialize
+  def initialize(scoring_system=:usual)
     @won_balls = INITIAL_WON_BALLS
+    @scoring_system = scoring_system
   end
 
   def score
-    SCORES[@won_balls]
+    return PECULIAR_SCORES[@won_balls] if @scoring_system == :peculiar
+    USUAL_SCORES[@won_balls]
   end
 
   def win_ball
@@ -17,29 +21,59 @@ class Player
 end
 
 describe "Tennis game" do
-  subject(:player) { Player.new }
+  context "with the usual scoring system" do
+    subject(:player) { Player.new }
 
-  it "initial player score" do
-    expect(player.score).to eq(0)
+    it "initial player score" do
+      expect(player.score).to eq("0")
+    end
+
+    it "player wins one ball" do
+      player.win_ball
+      expect(player.score).to eq("15")
+    end
+
+    it "player wins two balls" do
+      2.times { player.win_ball }
+      expect(player.score).to eq("30")
+    end
+
+    it "player wins three balls" do
+      3.times { player.win_ball }
+      expect(player.score).to eq("40")
+    end
+
+    it "player wins the game" do
+      4.times { player.win_ball }
+      expect(player.score).to eq("WON")
+    end
   end
 
-  it "player wins one ball" do
-    player.win_ball
-    expect(player.score).to eq(15)
-  end
+  context "with the peculiar scoring system" do
+    subject(:player) { Player.new(:peculiar) }
 
-  it "player wins two balls" do
-    2.times { player.win_ball }
-    expect(player.score).to eq(30)
-  end
+    it "initial player score" do
+      expect(player.score).to eq("love")
+    end
 
-  it "player wins three balls" do
-    3.times { player.win_ball }
-    expect(player.score).to eq(40)
-  end
+    it "player wins one ball" do
+      player.win_ball
+      expect(player.score).to eq("fifteen")
+    end
 
-  it "player wins the game" do
-    4.times { player.win_ball }
-    expect(player.score).to eq("WON")
+    it "player wins two balls" do
+      2.times { player.win_ball }
+      expect(player.score).to eq("thirty")
+    end
+
+    it "player wins three balls" do
+      3.times { player.win_ball }
+      expect(player.score).to eq("forty")
+    end
+
+    it "player wins the game" do
+      4.times { player.win_ball }
+      expect(player.score).to eq("WON")
+    end
   end
 end
