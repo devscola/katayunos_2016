@@ -1,20 +1,12 @@
 class Player
+  SCORES = [0, 15, 30, 40, "WON"]
+
   def initialize
     @won_balls = 0
   end
 
   def score
-    if @won_balls == 0
-      0
-    elsif @won_balls == 1
-      15
-    elsif @won_balls == 2
-      30
-    elsif @won_balls == 3
-      40
-    else
-      "WON"
-    end
+    SCORES[@won_balls]
   end
 
   def win_ball
