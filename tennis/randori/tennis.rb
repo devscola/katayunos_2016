@@ -1,8 +1,10 @@
 class Player
   SCORES = [0, 15, 30, 40, "WON"]
+  INITIAL_WON_BALLS = 0
+  WON_BALL_INCREMENT = 1
 
   def initialize
-    @won_balls = 0
+    @won_balls = INITIAL_WON_BALLS
   end
 
   def score
@@ -10,7 +12,7 @@ class Player
   end
 
   def win_ball
-    @won_balls += 1
+    @won_balls += WON_BALL_INCREMENT
   end
 end
 
