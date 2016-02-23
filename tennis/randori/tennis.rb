@@ -16,9 +16,9 @@ class Player
   INITIAL_WON_BALLS = 0
   WON_BALL_INCREMENT = 1
 
-  def initialize(scoring_system=:usual)
+  def initialize(scoring_system)
     @won_balls = INITIAL_WON_BALLS
-    @score = Score.new(scoring_system)
+    @score = scoring_system
   end
 
   def score
@@ -32,7 +32,7 @@ end
 
 describe "Tennis game" do
   context "with the usual scoring system" do
-    subject(:player) { Player.new }
+    subject(:player) { Player.new(Score.new(:usual)) }
 
     it "initial player score" do
       expect(player.score).to eq("0")
@@ -60,7 +60,7 @@ describe "Tennis game" do
   end
 
   context "with the peculiar scoring system" do
-    subject(:player) { Player.new(:peculiar) }
+    subject(:player) { Player.new(Score.new(:peculiar)) }
 
     it "initial player score" do
       expect(player.score).to eq("love")
