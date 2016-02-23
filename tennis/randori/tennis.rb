@@ -8,13 +8,13 @@ class Player
   end
 
   def score
+    return "WON" if @score >= (MAX_POINTS + POINTS_INCREMENT)
+    return MAX_POINTS if @score > MAX_POINTS
     @score
   end
 
   def win_ball
-    (@score = "WON" and return) if @score == MAX_POINTS
     @score += POINTS_INCREMENT
-    @score = MAX_POINTS if @score > MAX_POINTS
   end
 end
 
