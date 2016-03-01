@@ -12,7 +12,7 @@ describe "Minesweeper" do
       expect { Minesweeper.solve(input) }.to raise_error Minesweeper::ParsingException
     end
   end
-  it "a clean field of two" do
+  xit "a clean field of two" do
     input = "2 2" + "\n" +
             ".." + "\n" +
             ".." + "\n" +
