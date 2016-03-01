@@ -11,6 +11,10 @@ describe "Minesweeper" do
       input = "1 -2"
       expect { Minesweeper.solve(input) }.to raise_error Minesweeper::ParsingException
     end
+    it "doesn't allow no rows" do
+      input = "0 2"
+      expect { Minesweeper.solve(input) }.to raise_error Minesweeper::ParsingException
+    end
   end
   xit "a clean field of two" do
     input = "2 2" + "\n" +
