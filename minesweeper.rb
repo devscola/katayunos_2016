@@ -10,6 +10,6 @@ class Minesweeper
   private
 
   def self.invalid_input? input
-    input =~ /-/ || input =~ /^0 [^0]/
+    input =~ /-/ || input =~ /^0 [^0]/ || input =~/^[^0] 0/
   end
 end
