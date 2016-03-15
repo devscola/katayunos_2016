@@ -1,7 +1,7 @@
 class Parser
   def initialize(input)
     @number_of_fields = extract_number_of_fields(input)
-    @input = input
+    @fields = [input.split("\n")[1..-2].join]
   end
 
   def number_of_fields
@@ -9,7 +9,7 @@ class Parser
   end
 
   def next
-    @input.split("\n")[1..-2].join
+    @fields.first
   end
 
   private
