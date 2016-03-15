@@ -10,9 +10,7 @@ class Parser
   private
 
   def extract_number_of_fields(input)
-    input.split("\n").
-      select { |l| l.match(/\d/) }.
-      count - 1
+    input.count("1-9") / 2
   end
 end
 
