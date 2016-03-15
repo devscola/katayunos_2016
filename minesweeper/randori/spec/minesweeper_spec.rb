@@ -4,11 +4,8 @@ class Parser
   end
 
   def number_of_fields
-    if @input.start_with?('4')
-      2
-    else
-      0
-    end
+    return 2 if @input.start_with?('4')
+    0
   end
 end
 
