@@ -1,6 +1,7 @@
 class Parser
   def initialize(input)
     @number_of_fields = extract_number_of_fields(input)
+    @input = input
   end
 
   def number_of_fields
@@ -8,7 +9,7 @@ class Parser
   end
 
   def next
-    "*........*......"
+    @input.split("\n")[1..-2].join
   end
 
   private
@@ -69,5 +70,11 @@ EOF
     field = parser.next
 
     expect(field.to_s).to eq("*........*......")
+
+    parser = Parser.new(two_by_two + terminator)
+
+    field = parser.next
+
+    expect(field.to_s).to eq("*...")
   end
 end
