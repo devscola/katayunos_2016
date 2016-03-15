@@ -15,45 +15,46 @@ class Parser
 end
 
 describe 'MineSweeper Parser' do
+  let(:four_by_four) do
+    <<EOF
+4 4
+*...
+....
+.*..
+....
+EOF
+  end
+  let(:three_by_five) do
+    <<EOF
+3 5
+**...
+.....
+.*...
+EOF
+  end
+  let(:two_by_two) do
+    <<EOF
+2 2
+*.
+..
+EOF
+  end
+  let(:terminator) { "0 0" }
+
   it 'knows when there are no fields' do
-    parser = Parser.new("0 0")
+    parser = Parser.new(terminator)
 
     expect(parser.number_of_fields).to eq(0)
   end
 
   it 'knows how many fields there are' do
-    input = <<EOF
-4 4
-*...
-....
-.*..
-....
-3 5
-**...
-.....
-.*...
-0 0
-EOF
-    parser = Parser.new(input)
+    two_fields = four_by_four + three_by_five + terminator
+    parser = Parser.new(two_fields)
 
     expect(parser.number_of_fields).to eq(2)
 
-    input = <<EOF
-4 4
-*...
-....
-.*..
-....
-2 2
-*.
-..
-3 5
-**...
-.....
-.*...
-0 0
-EOF
-    parser = Parser.new(input)
+    three_fields = four_by_four + two_by_two + three_by_five + terminator
+    parser = Parser.new(three_fields)
 
     expect(parser.number_of_fields).to eq(3)
   end
