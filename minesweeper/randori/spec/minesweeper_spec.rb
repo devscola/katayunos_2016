@@ -10,8 +10,9 @@ class Parser
   private
 
   def extract_number_of_fields(input)
-    return 2 if input.start_with?('4')
-    0
+    input.split("\n").
+      select { |l| l.match(/\d/) }.
+      count - 1
   end
 end
 
@@ -38,5 +39,24 @@ EOF
     parser = Parser.new(input)
 
     expect(parser.number_of_fields).to eq(2)
+
+    input = <<EOF
+4 4
+*...
+....
+.*..
+....
+2 2
+*.
+..
+3 5
+**...
+.....
+.*...
+0 0
+EOF
+    parser = Parser.new(input)
+
+    expect(parser.number_of_fields).to eq(3)
   end
 end
