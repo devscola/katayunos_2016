@@ -1,11 +1,17 @@
 class Parser
   def initialize(input)
-    @number_of_fields = 0
-    @number_of_fields = 2 if input.start_with?('4')
+    @number_of_fields = extract_number_of_fields(input)
   end
 
   def number_of_fields
     @number_of_fields
+  end
+
+  private
+
+  def extract_number_of_fields(input)
+    return 2 if input.start_with?('4')
+    0
   end
 end
 
