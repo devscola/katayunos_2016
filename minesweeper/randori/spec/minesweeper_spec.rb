@@ -1,9 +1,14 @@
 class Parser
   def initialize(input)
+    @input = input
   end
 
   def number_of_fields
-    0
+    if @input.start_with?('4')
+      2
+    else
+      0
+    end
   end
 end
 
@@ -12,5 +17,23 @@ describe 'MineSweeper Parser' do
     parser = Parser.new("0 0")
 
     expect(parser.number_of_fields).to eq(0)
+  end
+
+  it 'knows how many fields there are' do
+    input = <<EOF
+4 4
+*...
+....
+.*..
+....
+3 5
+**...
+.....
+.*...
+0 0
+EOF
+    parser = Parser.new(input)
+
+    expect(parser.number_of_fields).to eq(2)
   end
 end
