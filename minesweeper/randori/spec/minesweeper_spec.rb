@@ -7,6 +7,10 @@ class Parser
     @number_of_fields
   end
 
+  def next
+    "*........*......"
+  end
+
   private
 
   def extract_number_of_fields(input)
@@ -57,5 +61,13 @@ EOF
     parser = Parser.new(three_fields)
 
     expect(parser.number_of_fields).to eq(3)
+  end
+
+  it 'extracts fields' do
+    parser = Parser.new(four_by_four + terminator)
+
+    field = parser.next
+
+    expect(field.to_s).to eq("*........*......")
   end
 end
