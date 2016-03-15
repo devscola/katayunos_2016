@@ -19,7 +19,9 @@ class Parser
   end
 
   def extract_fields(input)
-    [input.split("\n")[1..-2].join]
+    lines = input.split("\n")
+    all_lines_but_first_and_last = lines[1..-2]
+    [all_lines_but_first_and_last.join]
   end
 end
 
