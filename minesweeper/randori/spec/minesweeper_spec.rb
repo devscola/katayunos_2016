@@ -1,4 +1,6 @@
 class Parser
+  FIELD_SEPARATOR = /\d\s\d/
+
   def initialize(input)
     @number_of_fields = extract_number_of_fields(input)
     @fields = extract_fields(input)
@@ -20,7 +22,7 @@ class Parser
 
   def extract_fields(input)
     without_newlines = input.tr("\n",'')
-    split_by_separators = without_newlines.split(/\d\s\d/)
+    split_by_separators = without_newlines.split(FIELD_SEPARATOR)
     split_by_separators.reject(&:empty?)
   end
 end
