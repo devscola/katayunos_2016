@@ -19,9 +19,9 @@ class Parser
   end
 
   def extract_fields(input)
-    input.split(/\d\s\d/).
-      reject(&:empty?).
-      map { |l| l.tr("\n", '') }
+    without_newlines = input.tr("\n",'')
+    split_by_separators = without_newlines.split(/\d\s\d/)
+    split_by_separators.reject(&:empty?)
   end
 end
 
