@@ -6,7 +6,7 @@ class Parser
   end
 
   def next
-    @fields.shift
+    Field.new(@fields.shift)
   end
 
   private
@@ -15,6 +15,20 @@ class Parser
     without_newlines = input.tr("\n",'')
     split_by_separators = without_newlines.split(FIELD_SEPARATOR)
     split_by_separators.reject(&:empty?)
+  end
+end
+
+class Field
+  def initialize(content)
+    @content = content
+  end
+
+  def resolve
+    "*111"
+  end
+
+  def to_s
+    @content.to_s
   end
 end
 
@@ -55,5 +69,23 @@ EOF
     field = parser.next 
 
     expect(field.to_s).to eq("*........*......")
+
+    expect(parser.next.to_s).to eq("")
+  end
+end
+
+describe 'MineSweeper Field' do
+  let(:two_by_two) do
+    <<EOF
+2 2
+*.
+..
+EOF
+  end
+  let(:terminator) { "0 0" }
+  subject(:field) { Parser.new(two_by_two + terminator).next }
+
+  it 'resolves' do
+    expect(field.resolve).to eq("*111")
   end
 end
