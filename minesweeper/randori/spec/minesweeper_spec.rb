@@ -2,12 +2,7 @@ class Parser
   FIELD_SEPARATOR = /\d\s\d/
 
   def initialize(input)
-    @number_of_fields = extract_number_of_fields(input)
     @fields = extract_fields(input)
-  end
-
-  def number_of_fields
-    @number_of_fields
   end
 
   def next
@@ -15,10 +10,6 @@ class Parser
   end
 
   private
-
-  def extract_number_of_fields(input)
-    input.count("1-9") / 2
-  end
 
   def extract_fields(input)
     without_newlines = input.tr("\n",'')
@@ -53,19 +44,6 @@ EOF
 EOF
   end
   let(:terminator) { "0 0" }
-
-  it 'knows when there are no fields' do
-    parser = Parser.new(terminator)
-
-    expect(parser.number_of_fields).to eq(0)
-  end
-
-  it 'knows how many fields there are' do
-    three_fields = four_by_four + two_by_two + three_by_five + terminator
-    parser = Parser.new(three_fields)
-
-    expect(parser.number_of_fields).to eq(3)
-  end
 
   it 'extracts fields' do
     parser = Parser.new(two_by_two + four_by_four + terminator)
