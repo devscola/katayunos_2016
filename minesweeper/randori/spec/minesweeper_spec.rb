@@ -9,7 +9,7 @@ class Parser
   end
 
   def next
-    @fields.first
+    @fields.shift
   end
 
   private
@@ -19,9 +19,9 @@ class Parser
   end
 
   def extract_fields(input)
-    lines = input.split("\n")
-    all_lines_but_first_and_last = lines[1..-2]
-    [all_lines_but_first_and_last.join]
+    input.split(/\d\s\d/).
+      reject(&:empty?).
+      map { |l| l.tr("\n", '') }
   end
 end
 
@@ -82,5 +82,15 @@ EOF
     field = parser.next
 
     expect(field.to_s).to eq("*...")
+
+    parser = Parser.new(two_by_two + four_by_four + terminator)
+
+    field = parser.next
+
+    expect(field.to_s).to eq("*...")
+
+    field = parser.next 
+
+    expect(field.to_s).to eq("*........*......")
   end
 end
