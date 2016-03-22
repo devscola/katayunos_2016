@@ -61,11 +61,6 @@ EOF
   end
 
   it 'knows how many fields there are' do
-    two_fields = four_by_four + three_by_five + terminator
-    parser = Parser.new(two_fields)
-
-    expect(parser.number_of_fields).to eq(2)
-
     three_fields = four_by_four + two_by_two + three_by_five + terminator
     parser = Parser.new(three_fields)
 
@@ -73,18 +68,6 @@ EOF
   end
 
   it 'extracts fields' do
-    parser = Parser.new(four_by_four + terminator)
-
-    field = parser.next
-
-    expect(field.to_s).to eq("*........*......")
-
-    parser = Parser.new(two_by_two + terminator)
-
-    field = parser.next
-
-    expect(field.to_s).to eq("*...")
-
     parser = Parser.new(two_by_two + four_by_four + terminator)
 
     field = parser.next
