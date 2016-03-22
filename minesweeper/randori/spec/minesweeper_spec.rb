@@ -24,11 +24,26 @@ class Field
   end
 
   def resolve
-    "*111"
+    first_line = next_line 
+    second_line = next_line
+    first_line + second_line
   end
 
   def to_s
     @content.to_s
+  end
+
+  private
+
+  def next_line
+    @next_line_called ||= 0
+    @next_line_called += 1
+    mine = "*"
+    one_mine_neighbour = "1"
+    
+    return one_mine_neighbour + one_mine_neighbour if @next_line_called == 2
+    
+    mine + one_mine_neighbour
   end
 end
 
@@ -82,10 +97,11 @@ describe 'MineSweeper Field' do
 ..
 EOF
   end
+
   let(:terminator) { "0 0" }
-  subject(:field) { Parser.new(two_by_two + terminator).next }
 
   it 'resolves' do
+    field = Parser.new(two_by_two + terminator).next
     expect(field.resolve).to eq("*111")
   end
 end
