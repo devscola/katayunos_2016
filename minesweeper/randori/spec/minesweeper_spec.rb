@@ -45,10 +45,12 @@ class Field
   def next_line(current)
     mine = "*"
     one_mine_neighbour = "1"
+    no_mine_neighbour = "0"
     second_row = 2
+    third_row = 3
 
-    if current == 3
-      return "00"
+    if current == third_row
+      return no_mine_neighbour + no_mine_neighbour
     end
 
     if current == second_row
