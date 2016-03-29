@@ -49,41 +49,16 @@ class Field
     mine = "*"
     one_mine_neighbour = "1"
     no_mine_neighbour = "0"
-    first_row = 1
-    second_row = 2
-    third_row = 3
 
-    if row == first_row
-      if column == 1
-        return mine
-      end
+    values = {
+      [1,1] => mine,
+      [1,2] => one_mine_neighbour,
+      [2,1] => one_mine_neighbour,
+      [2,2] => one_mine_neighbour
+    }
+    values.default = no_mine_neighbour
 
-      if column == 2
-        return one_mine_neighbour
-      end
-    end
-
-    if row == second_row
-      if column == 1
-        return one_mine_neighbour
-      end
-
-      if column == 2
-        return one_mine_neighbour
-      end
-    end
-    
-    if row == third_row
-      if column == 1
-        return no_mine_neighbour
-      end
-
-      if column == 2
-        return no_mine_neighbour
-      end
-    end
-
-    no_mine_neighbour
+    return values[[row, column]]
   end
 end
 
