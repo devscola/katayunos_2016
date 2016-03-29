@@ -29,25 +29,13 @@ class Field
 
   def resolve
     result = ""
-    mine = "*"
-    one_mine_neighbour = "1"
-    no_mine_neighbour = "0"
-    first_row = 1
-    second_row = 2
-    third_row = 3
 
     1.upto(@rows) do |row|
-      if row == first_row
-        result += mine + one_mine_neighbour
+      line = ""
+      1.upto(@columns) do |column|
+        line += value(row, column)
       end
-
-      if row == second_row
-        result += one_mine_neighbour + one_mine_neighbour 
-      end
-      
-      if row == third_row
-        result += no_mine_neighbour + no_mine_neighbour
-      end
+      result += line
     end
 
     result
@@ -55,6 +43,47 @@ class Field
 
   def to_s
     @content.to_s
+  end
+
+  def value(row, column)
+    mine = "*"
+    one_mine_neighbour = "1"
+    no_mine_neighbour = "0"
+    first_row = 1
+    second_row = 2
+    third_row = 3
+
+    if row == first_row
+      if column == 1
+        return mine
+      end
+
+      if column == 2
+        return one_mine_neighbour
+      end
+    end
+
+    if row == second_row
+      if column == 1
+        return one_mine_neighbour
+      end
+
+      if column == 2
+        return one_mine_neighbour
+      end
+    end
+    
+    if row == third_row
+      if column == 1
+        return no_mine_neighbour
+      end
+
+      if column == 2
+        return no_mine_neighbour
+      end
+    end
+
+    no_mine_neighbour
   end
 end
 
