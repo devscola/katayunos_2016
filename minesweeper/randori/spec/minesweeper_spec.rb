@@ -38,10 +38,11 @@ class Field
   def next_line
     @next_line_called ||= 0
     @next_line_called += 1
+    rows = 2
     mine = "*"
     one_mine_neighbour = "1"
     
-    return one_mine_neighbour + one_mine_neighbour if @next_line_called == 2
+    return one_mine_neighbour + one_mine_neighbour if @next_line_called == rows
     
     mine + one_mine_neighbour
   end
