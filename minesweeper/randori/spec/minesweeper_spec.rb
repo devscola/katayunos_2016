@@ -42,8 +42,11 @@ class Field
   def next_line(current)
     mine = "*"
     one_mine_neighbour = "1"
+    second_row = 2
     
-    return one_mine_neighbour + one_mine_neighbour if current == 2
+    if current == second_row
+      return one_mine_neighbour + one_mine_neighbour 
+    end
     
     mine + one_mine_neighbour
   end
