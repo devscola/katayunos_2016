@@ -31,11 +31,9 @@ class Field
     result = ""
 
     1.upto(@rows) do |row|
-      line = ""
       1.upto(@columns) do |column|
-        line += value(row, column)
+        result += value(row, column)
       end
-      result += line
     end
 
     result
