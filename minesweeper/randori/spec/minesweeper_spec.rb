@@ -6,19 +6,17 @@ class Parser
   end
 
   def next
-    content = @fields.shift
-    return if content.nil?
-    rows = 2
-    rows = 3 if content.size > 4
-    Field.new(content, rows)
+    @fields.shift
   end
 
   private
 
   def extract_fields(input)
     without_newlines = input.tr("\n",'')
-    split_by_separators = without_newlines.split(FIELD_SEPARATOR)
-    split_by_separators.reject(&:empty?)
+    split_by_separators = without_newlines.scan(/(\d)\s(\d)([\.\*]+)/)
+    split_by_separators.map do |sbs|
+      Field.new(sbs[2], sbs[0].to_i)  
+    end
   end
 end
 
