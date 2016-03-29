@@ -6,8 +6,11 @@ class Parser
   end
 
   def next
+    content = @fields.shift
+    return if content.nil?
     rows = 2
-    Field.new(@fields.shift, rows)
+    rows = 3 if content.size > 4
+    Field.new(content, rows)
   end
 
   private
@@ -43,7 +46,11 @@ class Field
     mine = "*"
     one_mine_neighbour = "1"
     second_row = 2
-    
+
+    if current == 3
+      return "00"
+    end
+
     if current == second_row
       return one_mine_neighbour + one_mine_neighbour 
     end
@@ -102,11 +109,21 @@ describe 'MineSweeper Field' do
 ..
 EOF
   end
-
+  let(:three_by_two) do
+    <<EOF
+3 2
+*.
+..
+..
+EOF
+  end
   let(:terminator) { "0 0" }
 
   it 'resolves' do
     field = Parser.new(two_by_two + terminator).next
     expect(field.resolve).to eq("*111")
+
+    field = Parser.new(three_by_two + terminator).next
+    expect(field.resolve).to eq("*11100")
   end
 end
