@@ -24,9 +24,12 @@ class Field
   end
 
   def resolve
-    first_line = next_line 
-    second_line = next_line
-    first_line + second_line
+    rows = 2
+    result = ""
+    1.upto(rows) do |row|
+      result += next_line(row)
+    end
+    result
   end
 
   def to_s
@@ -35,14 +38,11 @@ class Field
 
   private
 
-  def next_line
-    @next_line_called ||= 0
-    @next_line_called += 1
-    rows = 2
+  def next_line(current)
     mine = "*"
     one_mine_neighbour = "1"
     
-    return one_mine_neighbour + one_mine_neighbour if @next_line_called == rows
+    return one_mine_neighbour + one_mine_neighbour if current == 2
     
     mine + one_mine_neighbour
   end
