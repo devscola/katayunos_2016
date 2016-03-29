@@ -15,15 +15,16 @@ class Parser
     without_newlines = input.tr("\n",'')
     split_by_separators = without_newlines.scan(/(\d)\s(\d)([\.\*]+)/)
     split_by_separators.map do |sbs|
-      Field.new(sbs[2], sbs[0].to_i)  
+      Field.new(*sbs)  
     end
   end
 end
 
 class Field
-  def initialize(content, rows)
+  def initialize(rows, columns, content)
     @content = content
-    @rows = rows
+    @rows = rows.to_i
+    @columns = columns.to_i
   end
 
   def resolve
