@@ -29,19 +29,6 @@ class Field
 
   def resolve
     result = ""
-    1.upto(@rows) do |row|
-      result += next_line(row)
-    end
-    result
-  end
-
-  def to_s
-    @content.to_s
-  end
-
-  private
-
-  def next_line(current)
     mine = "*"
     one_mine_neighbour = "1"
     no_mine_neighbour = "0"
@@ -49,17 +36,25 @@ class Field
     second_row = 2
     third_row = 3
 
-    if current == first_row
-      return mine + one_mine_neighbour
+    1.upto(@rows) do |row|
+      if row == first_row
+        result += mine + one_mine_neighbour
+      end
+
+      if row == second_row
+        result += one_mine_neighbour + one_mine_neighbour 
+      end
+      
+      if row == third_row
+        result += no_mine_neighbour + no_mine_neighbour
+      end
     end
 
-    if current == second_row
-      return one_mine_neighbour + one_mine_neighbour 
-    end
-    
-    if current == third_row
-      return no_mine_neighbour + no_mine_neighbour
-    end
+    result
+  end
+
+  def to_s
+    @content.to_s
   end
 end
 
