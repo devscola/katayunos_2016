@@ -6,7 +6,8 @@ class Parser
   end
 
   def next
-    Field.new(@fields.shift)
+    rows = 2
+    Field.new(@fields.shift, rows)
   end
 
   private
@@ -19,14 +20,14 @@ class Parser
 end
 
 class Field
-  def initialize(content)
+  def initialize(content, rows)
     @content = content
+    @rows = rows
   end
 
   def resolve
-    rows = 2
     result = ""
-    1.upto(rows) do |row|
+    1.upto(@rows) do |row|
       result += next_line(row)
     end
     result
