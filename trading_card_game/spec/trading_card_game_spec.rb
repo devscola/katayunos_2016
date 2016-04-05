@@ -17,8 +17,17 @@ describe 'Trading Card Game' do
     expect(damage).to eql(1)
   end
 
-  it 'plays as many cards that inflict maximum damage' do
+  it 'plays as many cards as to inflict maximum damage' do
     deck = [2, 1, 1]
+    mana = 3
+
+    damage = play_hand(deck, mana)
+    
+    expect(damage).to eql(3)
+  end
+
+  it 'plays as many cards as long as mana is not exceeded' do
+    deck = [3, 2, 1]
     mana = 3
 
     damage = play_hand(deck, mana)
@@ -27,13 +36,11 @@ describe 'Trading Card Game' do
   end
 end
 
-def play_hand(deck, mana)  
-  return 0 if mana <= 0
-  deck.detect { |card| (mana) == card }.to_i + play_hand(deck, mana - 1)
+def play_hand(deck, mana)
+  return 0 if deck.empty?
+  head, *tail = deck
+
+  damage = 0
+  damage = head if head <= mana
+  damage + play_hand(tail, mana - damage)
 end
-
-
-
-
-
-
