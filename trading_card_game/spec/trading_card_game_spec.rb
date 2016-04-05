@@ -27,14 +27,12 @@ describe 'Trading Card Game' do
   end
 end
 
-def play_hand(deck, mana)
-  card_with_mana_value = deck.detect { |card| mana == card }
-  if card_with_mana_value == nil
-    first_card = deck.detect { |card| (mana - 1) == card}
-    second_card = deck.detect { |card| (mana - 2) == card}
+def play_hand(deck, mana)  
+  damage = 0
+  mana.times do |i|
+    damage += deck.detect { |card| (mana - i) == card }.to_i
   end
-
-  card_with_mana_value || first_card + second_card
+  damage
 end
 
 
