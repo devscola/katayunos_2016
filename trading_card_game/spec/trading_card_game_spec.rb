@@ -8,7 +8,7 @@ describe 'Trading Card Game' do
     expect(damage).to eql(1)
   end
 
-  it 'plays a card that does not exceed the mana cost' do
+  it 'plays a card that inflicts maximum damage' do
     deck = [2, 1]
     mana = 1
 
@@ -17,7 +17,7 @@ describe 'Trading Card Game' do
     expect(damage).to eql(1)
   end
 
-  it 'plays as many cards that do not exceed the mana cost' do
+  it 'plays as many cards that inflict maximum damage' do
     deck = [2, 1, 1]
     mana = 3
 
@@ -28,11 +28,8 @@ describe 'Trading Card Game' do
 end
 
 def play_hand(deck, mana)  
-  damage = 0
-  mana.times do |i|
-    damage += deck.detect { |card| (mana - i) == card }.to_i
-  end
-  damage
+  return 0 if mana <= 0
+  deck.detect { |card| (mana) == card }.to_i + play_hand(deck, mana - 1)
 end
 
 
