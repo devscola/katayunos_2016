@@ -6,6 +6,11 @@ describe 'Trading Card Game' do
       a_player = Player.new
       expect(a_player.health).to eq(30)
     end
+
+    it "initial mana slots" do
+      a_player = Player.new
+      expect(a_player.mana_slots).to eq(0)
+    end
   end
 
   context "Gameplay" do

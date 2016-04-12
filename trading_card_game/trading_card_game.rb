@@ -1,7 +1,12 @@
 class Player
   INITIAL_HEALTH = 30
+
   def health
     INITIAL_HEALTH
+  end
+
+  def mana_slots
+    0
   end
 end
 
