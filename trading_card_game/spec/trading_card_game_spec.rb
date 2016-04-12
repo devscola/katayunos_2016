@@ -2,19 +2,42 @@ require_relative '../trading_card_game'
 
 describe 'Trading Card Game' do
   context "Preparation" do
+    def a_deck(*cards)
+      cards
+    end
+
+    def a_card(damage_points)
+      damage_points
+    end
+
+    def a_player
+      Player.new
+    end
+
     it "initial player health" do
-      a_player = Player.new
-      expect(a_player.health).to eq(30)
+      player = a_player
+
+      initial_health = player.health
+
+      expect(initial_health).to eq(30)
     end
 
     it "initial mana slots" do
-      a_player = Player.new
-      expect(a_player.mana_slots).to eq(0)
+      player = a_player
+
+      initial_mana_slots = player.mana_slots
+
+      expect(initial_mana_slots).to eq(0)
     end
 
     it "initial deck" do
-      a_player = Player.new
-      expect(a_player.deck).to eq([0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8])
+      player = a_player
+      deck = a_deck(a_card(0), a_card(0), a_card(1), a_card(1), a_card(2), a_card(2), a_card(2), a_card(3), a_card(3),
+a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_card(6), a_card(6), a_card(7), a_card(8))
+
+      initial_deck = player.deck
+
+      expect(initial_deck).to eq(deck)
     end
   end
 
