@@ -11,6 +11,11 @@ describe 'Trading Card Game' do
       a_player = Player.new
       expect(a_player.mana_slots).to eq(0)
     end
+
+    it "initial deck" do
+      a_player = Player.new
+      expect(a_player.deck).to eq([0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8])
+    end
   end
 
   context "Gameplay" do
