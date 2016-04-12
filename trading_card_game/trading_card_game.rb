@@ -1,6 +1,7 @@
 class Player
+  INITIAL_HEALTH = 30
   def health
-    30
+    INITIAL_HEALTH
   end
 end
 
