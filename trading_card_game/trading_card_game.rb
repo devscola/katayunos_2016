@@ -14,6 +14,10 @@ class Player
   def deck
     INITIAL_DECK
   end
+
+  def hand
+    INITIAL_DECK.first(3)
+  end
 end
 
 def play_hand(deck, mana)

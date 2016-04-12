@@ -39,6 +39,14 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
 
       expect(initial_deck).to eq(deck)
     end
+
+    it "initial hand" do
+      player = a_player
+
+      initial_hand = player.hand
+
+      expect(initial_hand.count).to eq(3)
+    end
   end
 
   context "Gameplay" do
