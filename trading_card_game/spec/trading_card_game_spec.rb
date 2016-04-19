@@ -32,8 +32,7 @@ describe 'Trading Card Game' do
 
     it "initial deck" do
       player = a_player
-      deck = a_deck(a_card(0), a_card(0), a_card(1), a_card(1), a_card(2), a_card(2), a_card(2), a_card(3), a_card(3),
-a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_card(6), a_card(6), a_card(7), a_card(8))
+      deck = a_deck(a_card(0), a_card(0), a_card(1), a_card(1), a_card(2), a_card(2), a_card(2), a_card(3), a_card(3), a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_card(6), a_card(6), a_card(7), a_card(8))
 
       initial_deck = player.deck
 
@@ -46,6 +45,19 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
       initial_hand = player.hand
 
       expect(initial_hand.count).to eq(3)
+    end
+
+    it "initial hand takes the cards from the deck" do
+      player = a_player
+      all_cards = a_deck(a_card(0), a_card(0), a_card(1), a_card(1), a_card(2), a_card(2), a_card(2), a_card(3), a_card(3),
+a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_card(6), a_card(6), a_card(7), a_card(8))
+
+      initial_deck = player.deck
+      initial_hand = player.hand
+
+      player_cards = initial_hand + initial_deck
+
+      expect(player_cards.sort).to eq(all_cards.sort)
     end
   end
 

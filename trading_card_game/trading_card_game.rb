@@ -1,7 +1,11 @@
 class Player
   INITIAL_HEALTH = 30
   INITIAL_MANA_SLOTS = 0
-  INITIAL_DECK = [0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8]
+  INITIAL_DECK = [0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8].freeze
+
+  def initialize
+    @deck = INITIAL_DECK.dup
+  end
 
   def health
     INITIAL_HEALTH
@@ -12,11 +16,11 @@ class Player
   end
 
   def deck
-    INITIAL_DECK
+    @deck
   end
 
   def hand
-    INITIAL_DECK.first(3)
+    @deck.shift(3)
   end
 end
 
