@@ -2,6 +2,7 @@ class Player
   INITIAL_HEALTH = 30
   INITIAL_MANA_SLOTS = 0
   INITIAL_DECK = [0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8].freeze
+  INITIAL_HAND_SIZE = 3
 
   def initialize
     @deck = INITIAL_DECK.dup
@@ -20,7 +21,7 @@ class Player
   end
 
   def hand
-    @deck.shift(3)
+    @deck.shift(INITIAL_HAND_SIZE)
   end
 end
 
