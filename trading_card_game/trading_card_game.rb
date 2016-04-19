@@ -1,4 +1,4 @@
-class RandomUtil
+module RandomUtil
   def self.shuffle(collection)
     collection.shuffle
   end
