@@ -1,3 +1,9 @@
+class RandomUtil
+  def self.shuffle(collection)
+    collection.shuffle
+  end
+end
+
 class Player
   INITIAL_HEALTH = 30
   INITIAL_MANA_SLOTS = 0
@@ -28,6 +34,7 @@ class Player
   private
 
   def initial_hand
+    @deck = RandomUtil.shuffle(@deck)
     @deck.shift(INITIAL_HAND_SIZE)
   end
 end

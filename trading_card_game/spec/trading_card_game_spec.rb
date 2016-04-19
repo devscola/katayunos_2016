@@ -50,6 +50,14 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
 
       expect(player_cards.sort).to eq(all_cards.sort)
     end
+
+    it "initial hand takes random cards" do
+      any_cards = a_deck(a_card(0))
+
+      expect(RandomUtil).to receive(:shuffle).and_return(any_cards)
+
+      a_player
+    end
   end
 
   context "Gameplay" do
