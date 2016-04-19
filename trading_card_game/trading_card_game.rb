@@ -6,7 +6,7 @@ class Player
 
   def initialize
     @deck = INITIAL_DECK.dup
-    @hand = @deck.shift(INITIAL_HAND_SIZE)
+    @hand = initial_hand
   end
 
   def health
@@ -23,6 +23,12 @@ class Player
 
   def hand
     @hand
+  end
+
+  private
+
+  def initial_hand
+    @deck.shift(INITIAL_HAND_SIZE)
   end
 end
 
