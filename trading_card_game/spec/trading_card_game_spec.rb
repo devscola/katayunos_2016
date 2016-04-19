@@ -30,15 +30,6 @@ describe 'Trading Card Game' do
       expect(initial_mana_slots).to eq(0)
     end
 
-    it "initial deck" do
-      player = a_player
-      deck = a_deck(a_card(0), a_card(0), a_card(1), a_card(1), a_card(2), a_card(2), a_card(2), a_card(3), a_card(3), a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_card(6), a_card(6), a_card(7), a_card(8))
-
-      initial_deck = player.deck
-
-      expect(initial_deck).to eq(deck)
-    end
-
     it "initial hand" do
       player = a_player
 
