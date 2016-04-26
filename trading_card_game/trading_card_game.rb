@@ -45,7 +45,8 @@ class Player
   end
 
   def increment_mana_slots
-    @mana_slots += MANA_SLOT_INCREMENT if @mana_slots < MAXIMUM_MANA_SLOTS
+    return if @mana_slots == MAXIMUM_MANA_SLOTS
+    @mana_slots += MANA_SLOT_INCREMENT
   end
 end
 
