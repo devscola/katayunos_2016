@@ -67,6 +67,13 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
       expect { player.new_turn }.to change { player.mana_slots }.by(1)
     end
 
+    it 'receives up to a maximum of 10 total slots' do
+      player = a_player
+      10.times { player.new_turn }
+
+      expect { player.new_turn }.not_to change { player.mana_slots }
+    end
+
     it 'plays a card that matches the mana cost' do
       deck = [1]
       mana = 1

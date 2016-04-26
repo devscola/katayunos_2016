@@ -34,7 +34,7 @@ class Player
   end
 
   def new_turn
-    @mana_slots += MANA_SLOT_INCREMENT
+    @mana_slots += MANA_SLOT_INCREMENT if @mana_slots < 10
   end
 
   private
