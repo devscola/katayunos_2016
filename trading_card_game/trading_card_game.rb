@@ -7,6 +7,7 @@ end
 class Player
   INITIAL_HEALTH = 30
   INITIAL_MANA_SLOTS = 0
+  MAXIMUM_MANA_SLOTS = 10
   MANA_SLOT_INCREMENT = 1
   INITIAL_DECK = [0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8]
   INITIAL_HAND_SIZE = 3
@@ -34,7 +35,7 @@ class Player
   end
 
   def new_turn
-    @mana_slots += MANA_SLOT_INCREMENT if @mana_slots < 10
+    @mana_slots += MANA_SLOT_INCREMENT if @mana_slots < MAXIMUM_MANA_SLOTS
   end
 
   private
