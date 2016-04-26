@@ -1,19 +1,19 @@
 require_relative '../trading_card_game'
 
 describe 'Trading Card Game' do
+  def a_deck(*cards)
+    cards
+  end
+
+  def a_card(damage_points)
+    damage_points
+  end
+
+  def a_player
+    Player.new
+  end
+
   context "Preparation" do
-    def a_deck(*cards)
-      cards
-    end
-
-    def a_card(damage_points)
-      damage_points
-    end
-
-    def a_player
-      Player.new
-    end
-
     it "initial player health" do
       player = a_player
 
@@ -61,6 +61,15 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
   end
 
   context "Gameplay" do
+    it 'receives 1 Mana slot' do
+      player = a_player
+      current_mana_slots = player.mana_slots
+
+      player.new_turn
+
+      expect(player.mana_slots).to eq(current_mana_slots + 1)
+    end
+
     it 'plays a card that matches the mana cost' do
       deck = [1]
       mana = 1

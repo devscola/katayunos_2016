@@ -13,6 +13,7 @@ class Player
   def initialize
     @deck = RandomUtil.shuffle(INITIAL_DECK)
     @hand = initial_hand
+    @mana_slots = INITIAL_MANA_SLOTS
   end
 
   def health
@@ -20,7 +21,7 @@ class Player
   end
 
   def mana_slots
-    INITIAL_MANA_SLOTS
+    @mana_slots
   end
 
   def deck
@@ -29,6 +30,10 @@ class Player
 
   def hand
     @hand
+  end
+
+  def new_turn
+    @mana_slots += 1
   end
 
   private
