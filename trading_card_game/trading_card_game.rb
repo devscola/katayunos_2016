@@ -26,9 +26,7 @@ class Player
     @mana_slots
   end
 
-  def mana
-    mana_slots
-  end
+  alias mana mana_slots
 
   def deck
     @deck
