@@ -74,6 +74,14 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
       expect { player.new_turn }.not_to change { player.mana_slots }
     end
 
+    it 'empty Mana slots are refilled' do
+      player = a_player
+
+      player.new_turn
+
+      expect(player.mana).to eq(player.mana_slots)
+    end
+
     it 'plays a card that matches the mana cost' do
       deck = [1]
       mana = 1
