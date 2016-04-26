@@ -35,13 +35,17 @@ class Player
   end
 
   def new_turn
-    @mana_slots += MANA_SLOT_INCREMENT if @mana_slots < MAXIMUM_MANA_SLOTS
+    increment_mana_slots
   end
 
   private
 
   def initial_hand
     @deck.shift(INITIAL_HAND_SIZE)
+  end
+
+  def increment_mana_slots
+    @mana_slots += MANA_SLOT_INCREMENT if @mana_slots < MAXIMUM_MANA_SLOTS
   end
 end
 
