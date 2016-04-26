@@ -63,11 +63,8 @@ a_card(3), a_card(3), a_card(4), a_card(4), a_card(4), a_card(5), a_card(5), a_c
   context "Gameplay" do
     it 'receives 1 Mana slot' do
       player = a_player
-      current_mana_slots = player.mana_slots
 
-      player.new_turn
-
-      expect(player.mana_slots).to eq(current_mana_slots + 1)
+      expect { player.new_turn }.to change { player.mana_slots }.by(1)
     end
 
     it 'plays a card that matches the mana cost' do
