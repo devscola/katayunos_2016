@@ -27,7 +27,7 @@ class Player
   end
 
   def mana
-    @mana
+    mana_slots
   end
 
   def deck
@@ -40,7 +40,6 @@ class Player
 
   def new_turn
     increment_mana_slots
-    refill_mana_slots
   end
 
   private
@@ -52,10 +51,6 @@ class Player
   def increment_mana_slots
     return if @mana_slots == MAXIMUM_MANA_SLOTS
     @mana_slots += MANA_SLOT_INCREMENT
-  end
-
-  def refill_mana_slots
-    @mana = @mana_slots
   end
 end
 
