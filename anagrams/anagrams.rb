@@ -15,6 +15,12 @@ class TestAnagrams < Minitest::Test
     assert_equal(['a', 'a'], result)
   end
 
+  def test_no_anagrams
+    result = anagrams(['a', 'b'])
+
+    assert_equal([], result)
+  end
+
   def anagrams(input_list)
     occ = occurrences(input_list)
     anagrams = select_anagrams(occ)
