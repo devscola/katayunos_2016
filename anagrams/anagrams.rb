@@ -24,11 +24,9 @@ class TestAnagrams < Minitest::Test
   end
 
   def occurrences(input_list)
-    occurrences = Hash.new(0)
-    input_list.each do |e|
-      occurrences[e] = occurrences[e] + 1
+    input_list.each_with_object(Hash.new(0)) do |e, acc|
+      acc[e] = acc[e] + 1
     end
-    occurrences
   end
 
 end
