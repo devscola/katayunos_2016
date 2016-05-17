@@ -6,13 +6,13 @@ class TestAnagrams < Minitest::Test
   def test_dummy
     result = anagrams(['a', 'a'])
 
-    assert_equal(['a', 'a'], result)
+    assert_equal([['a', 'a']], result)
   end
 
   def test_one_anagram
     result = anagrams(['a', 'a', 'b'])
 
-    assert_equal(['a', 'a'], result)
+    assert_equal([['a', 'a']], result)
   end
 
   def test_no_anagrams
@@ -43,11 +43,11 @@ class TestAnagrams < Minitest::Test
   end
 
   def select_anagrams(occurrences)
-    occurrences.select{ |k, v| v > 1 }
+    occurrences.select{ |k, v| v.size > 1 }
   end
 
   def present(anagrams)
-    anagrams.map{ |k, v| [k]*v }.flatten
+    anagrams.map{ |k, v| v }
   end
 
   def occurrences(input_list)
