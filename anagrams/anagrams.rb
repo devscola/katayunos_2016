@@ -44,10 +44,14 @@ class TestAnagrams < Minitest::Test
 
   def occurrences(input_list)
     input_list.each_with_object(Hash.new) do |word, acc|
-      cannonical = word.chars.sort.join
-      acc[cannonical.to_sym] ||= []
-      acc[cannonical.to_sym] << word
+      key = cannonical(word).to_sym
+      acc[key] ||= []
+      acc[key] << word
     end
+  end
+
+  def cannonical(word)
+    word.chars.sort.join
   end
 
 end
