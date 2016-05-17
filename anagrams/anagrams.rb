@@ -43,7 +43,8 @@ class TestAnagrams < Minitest::Test
   end
 
   def select_anagrams(occurrences)
-    occurrences.select{ |_, v| v.size > 1 }
+    is_anagram = -> (_, v){ v.size > 1 }
+    occurrences.select(&is_anagram)
   end
 
   def present(anagrams)
