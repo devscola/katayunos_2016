@@ -53,9 +53,9 @@ class TestAnagrams < Minitest::Test
   end
 
   def occurrences(input_list)
-    input_list.each_with_object(Hash.new) do |word, acc|
+    initial_state = Hash.new{ |h, k| h[k] = [] }
+    input_list.each_with_object(initial_state) do |word, acc|
       key = cannonical(word).to_sym
-      acc[key] ||= []
       acc[key] << word
     end
   end
