@@ -21,6 +21,12 @@ class TestAnagrams < Minitest::Test
     assert_equal([], result)
   end
 
+  def test_occurences
+    result = occurrences(['an', 'na'])
+
+    assert_equal({an: ['an', 'na']}, result)
+  end
+
   def anagrams(input_list)
     occ = occurrences(input_list)
     anagrams = select_anagrams(occ)
@@ -37,8 +43,10 @@ class TestAnagrams < Minitest::Test
   end
 
   def occurrences(input_list)
-    input_list.each_with_object(Hash.new(0)) do |e, acc|
-      acc[e] = acc[e] + 1
+    input_list.each_with_object(Hash.new) do |word, acc|
+      cannonical = word.chars.sort.join
+      acc[cannonical.to_sym] ||= []
+      acc[cannonical.to_sym] << word
     end
   end
 
