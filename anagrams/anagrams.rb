@@ -27,6 +27,14 @@ class TestAnagrams < Minitest::Test
     assert_equal({an: ['an', 'na']}, result)
   end
 
+  def test_several_occurences
+    result = occurrences(['an', 'na', 'bo', 'ob'])
+
+    assert_equal({an: ['an', 'na'], bo: ['bo', 'ob']}, result)
+  end
+
+  ##########################################################################
+
   def anagrams(input_list)
     occ = occurrences(input_list)
     anagrams = select_anagrams(occ)
