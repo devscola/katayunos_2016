@@ -43,11 +43,11 @@ class TestAnagrams < Minitest::Test
   end
 
   def select_anagrams(occurrences)
-    occurrences.select{ |k, v| v.size > 1 }
+    occurrences.select{ |_, v| v.size > 1 }
   end
 
   def present(anagrams)
-    anagrams.map{ |k, v| v }
+    anagrams.map{ |_, v| v }
   end
 
   def occurrences(input_list)
