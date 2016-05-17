@@ -43,7 +43,8 @@ class TestAnagrams < Minitest::Test
   end
 
   def select_anagrams(occurrences)
-    is_anagram = -> (_, v){ v.size > 1 }
+    minimum_occurences = 2
+    is_anagram = -> (_, v){ v.size >= minimum_occurences }
     occurrences.select(&is_anagram)
   end
 
