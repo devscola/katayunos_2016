@@ -15,12 +15,19 @@ class TestAnagrams < Minitest::Test
     assert_equal(['a', 'a'], result)
   end
 
-
   def anagrams(input_list)
     occ = occurrences(input_list)
-    selected = occ.select{ |k, v| v > 1 }
-    result = selected.map{ |k, v| [k]*v }
-    result.flatten
+    anagrams = select_anagrams(occ)
+
+    present(anagrams)
+  end
+
+  def select_anagrams(occurrences)
+    occurrences.select{ |k, v| v > 1 }
+  end
+
+  def present(anagrams)
+    anagrams.map{ |k, v| [k]*v }.flatten
   end
 
   def occurrences(input_list)
