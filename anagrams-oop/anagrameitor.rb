@@ -1,91 +1,8 @@
-class Anagrameitor
-  class Anagrams
-    def initialize
-      @list = []
-    end
+require_relative 'anagrameitor/word'
+require_relative 'anagrameitor/words'
+require_relative 'anagrameitor/anagrams'
 
-    def include words
-      return if words.empty?
-      return if @list.include? words
-
-      @list << words
-    end
-
-    def to_a
-      @list.map(&:to_a)
-    end
-  end
-
-  class Word
-    include Comparable
-
-    def initialize literal
-      @literal = literal
-    end
-
-    def anagram? other
-      (other.literal != @literal) && (other.literal.size == @literal.size)
-    end
-
-    def <=> other
-      @literal <=> other.literal
-    end
-
-    def to_s
-      @literal.dup
-    end
-
-    protected
-
-    def literal
-      @literal
-    end
-  end
-
-  class Words
-    include Comparable
-
-    def initialize words=[]
-      @words = words
-      @index = -1
-    end
-
-    def add word
-      @words << word
-    end
-
-    def next?
-      @index < @words.size - 1
-    end
-
-    def next
-      @index += 1
-      Word.new @words[@index]
-    end
-
-    def <=> other
-      @words.sort <=> other.words.sort
-    end
-
-    def clone
-      Words.new @words
-    end
-
-    def empty?
-      @words.empty?
-    end
-
-    def to_a
-      @words.map(&:to_s)
-    end
-
-    protected
-
-    def words
-      @words
-    end
-  end
-
+module Anagrameitor
   def self.anagrams_in word_list
     words = Words.new word_list
 
@@ -102,6 +19,7 @@ class Anagrameitor
   def self.detect_anagrams_for candidate, words
     result = Words.new
     words = words.clone
+    
     while words.next?
       the_word = words.next
       if the_word.anagram? candidate
@@ -109,6 +27,7 @@ class Anagrameitor
         result.add the_word
       end
     end
+    
     result
   end
 end
