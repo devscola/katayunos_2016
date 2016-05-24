@@ -4,10 +4,6 @@ class Anagrameitor
       @list = []
     end
 
-    def add word
-      @list << word
-    end
-
     def include anagrams
       words = anagrams.to_a
       return if words.empty?
@@ -21,9 +17,13 @@ class Anagrameitor
   end
 
   class Words
-    def initialize words
+    def initialize words=[]
       @words = words
       @index = -1
+    end
+
+    def add word
+      @words << word
     end
 
     def next?
@@ -37,6 +37,10 @@ class Anagrameitor
 
     def clone
       Words.new @words
+    end
+
+    def to_a
+      @words
     end
   end
 
@@ -54,7 +58,7 @@ class Anagrameitor
   end
 
   def self.detect_anagrams_for candidate, words
-    result = Anagrams.new
+    result = Words.new
     words = words.clone
     while words.next?
       the_word = words.next
