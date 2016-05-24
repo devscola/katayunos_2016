@@ -104,15 +104,11 @@ class Anagrameitor
     words = words.clone
     while words.next?
       the_word = words.next
-      if anagram? the_word, candidate
+      if the_word.anagram? candidate
         result.add candidate
         result.add the_word
       end
     end
     result
-  end
-
-  def self.anagram? candidate, word
-    word.anagram? candidate
   end
 end
