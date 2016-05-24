@@ -4,19 +4,47 @@ class Anagrameitor
       @list = []
     end
 
-    def include anagrams
-      words = anagrams.to_a
+    def include words
       return if words.empty?
-      return if @list.any?{ |w| (w - words).empty? }
+      return if @list.include? words
+
       @list << words
     end
 
     def to_a
-      @list
+      @list.map(&:to_a)
+    end
+  end
+
+  class Word
+    include Comparable
+
+    def initialize literal
+      @literal = literal
+    end
+
+    def anagram? other
+      (other.literal != @literal) && (other.literal.size == @literal.size)
+    end
+
+    def <=> other
+      @literal <=> other.literal
+    end
+
+    def to_s
+      @literal.dup
+    end
+
+    protected
+
+    def literal
+      @literal
     end
   end
 
   class Words
+    include Comparable
+
     def initialize words=[]
       @words = words
       @index = -1
@@ -32,14 +60,28 @@ class Anagrameitor
 
     def next
       @index += 1
-      @words[@index]
+      Word.new @words[@index]
+    end
+
+    def <=> other
+      @words.sort <=> other.words.sort
     end
 
     def clone
       Words.new @words
     end
 
+    def empty?
+      @words.empty?
+    end
+
     def to_a
+      @words.map(&:to_s)
+    end
+
+    protected
+
+    def words
       @words
     end
   end
@@ -71,6 +113,6 @@ class Anagrameitor
   end
 
   def self.anagram? candidate, word
-    (candidate != word) && (candidate.size == word.size)
+    word.anagram? candidate
   end
 end
