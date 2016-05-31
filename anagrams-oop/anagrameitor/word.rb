@@ -1,3 +1,5 @@
+require_relative 'anagram_util'
+
 module Anagrameitor
   class Word
     include Comparable
@@ -7,7 +9,7 @@ module Anagrameitor
     end
 
     def anagram? other
-      (other.literal != @literal) && (other.literal.size == @literal.size)
+      AnagramUtil.anagram? other.literal, @literal
     end
 
     def <=> other

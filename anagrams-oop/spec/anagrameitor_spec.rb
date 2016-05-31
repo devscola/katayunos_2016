@@ -18,14 +18,14 @@ RSpec.describe "Anagrameitor" do
 
   context "Unit test" do
 
-    describe Anagrameitor::Word do
+    describe Anagrameitor::AnagramUtil do
       it "#anagram?" do
-        a_word = described_class.new "kinship"
-        another_word = described_class.new "pinkish"
-        expect(a_word.anagram? another_word).to be true
+        a_word = "kinship"
+        another_word = "pinkish"
+        expect(described_class.anagram? a_word, another_word).to be true
 
-        yet_another_word = described_class.new "aaaaaaa"
-        expect(a_word.anagram? yet_another_word).to be false
+        yet_another_word = "aaaaaaa"
+        expect(described_class.anagram? a_word, yet_another_word).to be false
       end
     end
   end
