@@ -1,10 +1,8 @@
 module Anagrameitor
   class Words
-    include Comparable
-
     def initialize words=[]
-      @words = words
-      @index = -1
+      @words = Set.new words
+      @enumerator = @words.each
     end
 
     def add word
@@ -12,16 +10,23 @@ module Anagrameitor
     end
 
     def next?
-      @index < @words.size - 1
+      @enumerator.peek
+      true
+    rescue StopIteration
+      false
     end
 
     def next
-      @index += 1
-      Word.new @words[@index]
+      Word.new @enumerator.next
     end
 
-    def <=> other
-      @words.sort <=> other.words.sort
+    def == other
+      @words == other.words
+    end
+    alias_method :eql?, :==
+
+    def hash
+      @words.hash
     end
 
     def clone

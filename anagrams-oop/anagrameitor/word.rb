@@ -1,7 +1,5 @@
 module Anagrameitor
   class Word
-    include Comparable
-
     def initialize literal
       @literal = literal
     end
@@ -10,9 +8,14 @@ module Anagrameitor
       (other.literal != @literal) && (other.literal.size == @literal.size)
     end
 
-    def <=> other
-      @literal <=> other.literal
+    def == other
+      @literal == other.literal
     end
+    alias_method :eql?, :==
+
+    def hash
+      @literal.hash
+    end 
 
     def to_s
       @literal.dup
