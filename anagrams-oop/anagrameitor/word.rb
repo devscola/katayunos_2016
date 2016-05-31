@@ -9,7 +9,7 @@ module Anagrameitor
     end
 
     def anagram? other
-      AnagramUtil.anagram? other.literal, @literal
+      AnagramUtil.anagrams? other.literal, @literal
     end
 
     def <=> other

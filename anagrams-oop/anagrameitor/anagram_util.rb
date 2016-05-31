@@ -1,7 +1,7 @@
 module Anagrameitor
   module AnagramUtil
-    def self.anagram? a_word_literal, another_word_literal
-      (a_word_literal != another_word_literal) && (another_word_literal.chars.sort == a_word_literal.chars.sort)
+    def self.anagrams? a_word, another_word
+      (a_word != another_word) && (another_word.chars.sort == a_word.chars.sort)
     end
   end
 end
