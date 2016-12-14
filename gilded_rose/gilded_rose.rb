@@ -1,49 +1,107 @@
 def update_quality(items)
   items.each do |item|
-    if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
-      if item.quality > 0
-        if item.name != 'Sulfuras, Hand of Ragnaros'
-          item.quality -= 1
+    if not_aged_brie_nor_backstage_passes?(item)
+      if degradable?(item)
+        if not_sulfuras?(item)
+          degrade!(item)
         end
       end
     else
-      if item.quality < 50
-        item.quality += 1
-        if item.name == 'Backstage passes to a TAFKAL80ETC concert'
-          if item.sell_in < 11
-            if item.quality < 50
-              item.quality += 1
+      if upgradable?(item)
+        upgrade!(item)
+        if backstage_passes?(item)
+          if early_bid?(item)
+            if upgradable?(item)
+              upgrade!(item)
             end
           end
-          if item.sell_in < 6
-            if item.quality < 50
-              item.quality += 1
+          if regular_bid?(item)
+            if upgradable?(item)
+              upgrade!(item)
             end
           end
         end
       end
     end
-    if item.name != 'Sulfuras, Hand of Ragnaros'
-      item.sell_in -= 1
+    if not_sulfuras?(item)
+      age!(item)
     end
-    if item.sell_in < 0
-      if item.name != "Aged Brie"
-        if item.name != 'Backstage passes to a TAFKAL80ETC concert'
-          if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
-              item.quality -= 1
+    if outdated?(item)
+      if not_aged_brie?(item)
+        if not_backstage_passes?(item)
+          if degradable?(item)
+            if not_sulfuras?(item)
+              degrade!(item)
             end
           end
         else
-          item.quality = item.quality - item.quality
+          make_worthless!(item)
         end
       else
-        if item.quality < 50
-          item.quality += 1
+        if upgradable?(item)
+          upgrade!(item)
         end
       end
     end
   end
+end
+
+# ---------
+
+def not_aged_brie_nor_backstage_passes?(item)
+  item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
+end
+
+def degradable?(item)
+  item.quality > 0
+end
+
+def not_sulfuras?(item)
+  item.name != 'Sulfuras, Hand of Ragnaros'
+end
+
+def degrade!(item)
+  item.quality -= 1
+end
+
+def upgradable?(item)
+  item.quality < 50
+end
+
+def upgrade!(item)
+  item.quality += 1
+end
+
+def backstage_passes?(item)
+  item.name == 'Backstage passes to a TAFKAL80ETC concert'
+end
+
+def not_backstage_passes?(item)
+  !backstage_passes?(item)
+end
+
+def not_aged_brie?(item)
+  item.name != "Aged Brie"
+end
+
+def early_bid?(item)
+  item.sell_in < 11
+end
+
+def regular_bid?(item)
+  item.sell_in < 6
+end
+
+def outdated?(item)
+  item.sell_in < 0
+end
+
+def age!(item)
+  item.sell_in -= 1
+end
+
+def make_worthless!(item)
+  item.quality = item.quality - item.quality
 end
 
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
