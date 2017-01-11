@@ -41,7 +41,8 @@ class ItemUpdater
     updaters = {
       "Aged Brie" => AgedBrieUpdater,
       "Backstage passes to a TAFKAL80ETC concert" => BackstagePassesUpdater,
-      "Sulfuras, Hand of Ragnaros" => SulfurasUpdater
+      "Sulfuras, Hand of Ragnaros" => SulfurasUpdater,
+      "Conjured Mana Cake" => ConjuredUpdater
     }
     return updaters[item.name].new(item) if updaters[item.name]
     new(item)
@@ -74,6 +75,14 @@ class ItemUpdater
 
   def outdated?
     item.sell_in < 0
+  end
+end
+
+class ConjuredUpdater < ItemUpdater
+  def update_quality!
+    item.quality -= 2
+    item.quality -= 2 if outdated?
+    item.quality = 0 if item.quality < 0
   end
 end
 
