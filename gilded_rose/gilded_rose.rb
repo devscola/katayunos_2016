@@ -1,80 +1,116 @@
 def update_quality(items)
   items.each do |item|
-    degrade!(item)
-    if aged_brie_or_backstage_passes?(item)
-      upgrade!(item)
-      upgrade!(item) if backstage_early_bid?(item)
-      upgrade!(item) if backstage_regular_bid?(item)
-    end
-    age!(item)
-    if outdated?(item)
-      upgrade!(item) if aged_brie?(item)
-      make_worthless!(item) if backstage_passes?(item)
-      degrade!(item)
-    end
+    updater = ItemUpdater.build_updater_for(item)
+    updater.update!
   end
 end
 
+# --------- This could be an alternative approach to ItemUpdater hierarchy
+
+# class SellableItem
+#   def initialize(item)
+#     @item = item
+#   end
+
+#   def name
+#     @item.name
+#   end
+
+#   def sell_in
+#     @item.sell_in
+#   end
+
+#   def quality
+#     @item.quality
+#   end
+
+#   def sell_in=(sell_in)
+#     @item.sell_in = sell_in
+#     @item.sell_in = 50 if @item.sell_in > 50
+#   end
+
+#   def quality=(quality)
+#     @item.quality = quality
+#   end
+# end
+
 # ---------
 
-def aged_brie_or_backstage_passes?(item)
-  item.name == 'Aged Brie' || item.name == 'Backstage passes to a TAFKAL80ETC concert'
+class ItemUpdater
+  def self.build_updater_for(item)
+    updaters = {
+      "Aged Brie" => AgedBrieUpdater,
+      "Backstage passes to a TAFKAL80ETC concert" => BackstagePassesUpdater,
+      "Sulfuras, Hand of Ragnaros" => SulfurasUpdater
+    }
+    return updaters[item.name].new(item) if updaters[item.name]
+    new(item)
+  end
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update!
+    update_sell_in!
+    update_quality!
+  end
+
+  protected
+
+  def item
+    @item
+  end
+
+  def update_quality!
+    item.quality -= 1
+    item.quality -= 1 if outdated?
+    item.quality = 0 if item.quality < 0
+  end
+
+  def update_sell_in!
+    item.sell_in -= 1
+  end
+
+  def outdated?
+    item.sell_in < 0
+  end
 end
 
-def not_aged_brie_nor_backstage_passes?(item)
-  !aged_brie_or_backstage_passes?(item)
+class AgedBrieUpdater < ItemUpdater
+  def update_quality!
+    item.quality += 1
+    item.quality += 1 if outdated?
+    item.quality = 50 if item.quality > 50
+  end
 end
 
-def degradable?(item)
-  return false if sulfuras?(item) || aged_brie_or_backstage_passes?(item)
-  item.quality > 0
+class BackstagePassesUpdater < ItemUpdater
+  def update_quality!
+    item.quality += 1
+    item.quality += 1 if early_bid?
+    item.quality += 1 if regular_bid?
+    item.quality = 0 if outdated?
+    item.quality = 50 if item.quality > 50
+  end
+
+  private
+
+  def early_bid?
+    item.sell_in < 10
+  end
+
+  def regular_bid?
+    item.sell_in < 5
+  end
 end
 
-def sulfuras?(item)
-  item.name == 'Sulfuras, Hand of Ragnaros'
-end
+class SulfurasUpdater < ItemUpdater
+  def update_quality!
+  end
 
-def degrade!(item)
-  return nil if !degradable?(item)
-  item.quality -= 1
-end
-
-def upgradable?(item)
-  item.quality < 50
-end
-
-def upgrade!(item)
-  return nil if !upgradable?(item)
-  item.quality += 1
-end
-
-def backstage_passes?(item)
-  item.name == 'Backstage passes to a TAFKAL80ETC concert'
-end
-
-def aged_brie?(item)
-  item.name == "Aged Brie"
-end
-
-def backstage_early_bid?(item)
-  backstage_passes?(item) && item.sell_in < 11
-end
-
-def backstage_regular_bid?(item)
-  backstage_passes?(item) &&  item.sell_in < 6
-end
-
-def outdated?(item)
-  item.sell_in < 0
-end
-
-def age!(item)
-  return nil if sulfuras?(item)
-  item.sell_in -= 1
-end
-
-def make_worthless!(item)
-  item.quality = item.quality - item.quality
+  def update_sell_in!
+  end
 end
 
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
