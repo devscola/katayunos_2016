@@ -30,7 +30,7 @@ class ItemUpdater
   end
 
   def on_outdated
-
+    raise "Implementing subclass"
   end
 
   def increase_quality(variation)
