@@ -13,6 +13,12 @@ RSpec.describe "Diamond" do
     expect(drawing).to eq(two_level_diamond)
   end
 
+  it "draws the three level diamond" do
+    drawing = diamond_for('C')
+
+    expect(drawing).to eq(three_level_diamond)
+  end
+
   def minimum_diamond
     <<~EOD
     A
@@ -24,6 +30,16 @@ RSpec.describe "Diamond" do
      A
     B B
      A
+    EOD
+  end
+
+  def three_level_diamond
+    <<~EOD
+      A
+     B B
+    C   C
+     B B
+      A
     EOD
   end
 end
