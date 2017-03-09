@@ -1,3 +1,7 @@
 def diamond_for(letter)
-  "#{letter}\n"
+  if letter == 'A'
+    "#{letter}\n"
+  else
+    " A\n#{letter} #{letter}\n A\n"
+  end
 end
