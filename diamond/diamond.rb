@@ -1,3 +1,3 @@
 def diamond_for(letter)
-  "A\n"
+  "#{letter}\n"
 end
