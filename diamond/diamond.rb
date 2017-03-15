@@ -16,7 +16,7 @@ class DiamondBuilder
 
   def build
     result = first_half + gap + second_half
-    result.split("\n").map{ |l| l.rstrip }.join("\n") + "\n"
+    remove_trailing_spaces_from(result) + "\n"
   end
 
   private
@@ -31,5 +31,9 @@ class DiamondBuilder
 
   def second_half
     first_half.reverse
+  end
+
+  def remove_trailing_spaces_from(result)
+    result.split("\n").map{ |l| l.rstrip }.join("\n")
   end
 end
