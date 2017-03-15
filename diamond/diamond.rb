@@ -2,7 +2,7 @@ def diamond_for(letter)
   if letter == 'A'
     "#{letter}\n"
   elsif letter == 'B'
-    first_half = " A \n#{letter}"
+    first_half = build_first_half_for(letter)
     gap = " "
     second_half = first_half.reverse
     result = first_half + gap + second_half
@@ -10,4 +10,8 @@ def diamond_for(letter)
   else
     "  A\n B B\n#{letter}   #{letter}\n B B\n  A\n"
   end
+end
+
+def build_first_half_for(letter)
+  " A \n#{letter}"
 end
