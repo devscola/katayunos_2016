@@ -4,7 +4,7 @@ def diamond_for(letter)
   elsif letter == 'B'
     first_half = build_first_half_for(letter)
     gap = build_gap
-    second_half = first_half.reverse
+    second_half = build_second_half_for(letter)
     result = first_half + gap + second_half
     result.split("\n").map{ |l| l.rstrip }.join("\n") + "\n"
   else
@@ -18,4 +18,8 @@ end
 
 def build_gap
   " "
+end
+
+def build_second_half_for(letter)
+  build_first_half_for(letter).reverse
 end
