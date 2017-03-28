@@ -4,6 +4,7 @@ def diamond_for(letter)
 end
 
 class DiamondBuilder
+  INITIAL_LETTER = 'A'
   NEW_LINE = "\n"
 
   def initialize(letter)
@@ -21,7 +22,7 @@ class DiamondBuilder
   end
 
   def first_half
-    ('A'...@letter).map do |current_letter|
+    (INITIAL_LETTER...@letter).map do |current_letter|
       build_line_for(current_letter)
     end
   end
@@ -45,7 +46,6 @@ class DiamondBuilder
 
   class LineBuilder
     SPACE = " "
-    INITIAL_LETTER = 'A'
 
     def initialize(letter, current_letter)
       @letter = letter
