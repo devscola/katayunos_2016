@@ -13,7 +13,7 @@ class DiamondBuilder
 
   def build
     result = first_half + middle_line + second_half
-    remove_trailing_spaces_from(result) + NEW_LINE
+    remove_trailing_spaces_from(result).join(NEW_LINE) + NEW_LINE
   end
 
   private
@@ -21,11 +21,11 @@ class DiamondBuilder
   def first_half
     ('A'...@letter).map do |current_letter|
       build_line_for(current_letter)
-    end.join
+    end
   end
 
   def middle_line
-    build_line_for(@letter).chomp
+    [ build_line_for(@letter) ]
   end
 
   def second_half
@@ -35,10 +35,10 @@ class DiamondBuilder
   def build_line_for(current_letter)
     padding = padding_for(current_letter)
     if current_letter == 'A'
-      padding + current_letter + padding + NEW_LINE
+      padding + current_letter + padding
     else
       gap = gap_for(current_letter)
-      padding + current_letter + gap + current_letter + padding + NEW_LINE
+      padding + current_letter + gap + current_letter + padding
     end
   end
 
@@ -53,6 +53,6 @@ class DiamondBuilder
   end
 
   def remove_trailing_spaces_from(result)
-    result.split(NEW_LINE).map{ |l| l.rstrip }.join(NEW_LINE)
+    result.map{ |line| line.rstrip }
   end
 end
