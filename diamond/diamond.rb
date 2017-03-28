@@ -10,13 +10,16 @@ def diamond_for(letter)
 end
 
 class DiamondBuilder
+  SPACE = " "
+  NEW_LINE = "\n"
+
   def initialize(letter)
     @letter = letter
   end
 
   def build
     result = first_half + middle_line + second_half
-    remove_trailing_spaces_from(result) + "\n"
+    remove_trailing_spaces_from(result) + NEW_LINE
   end
 
   private
@@ -33,7 +36,7 @@ class DiamondBuilder
 
   def gap
     number_of_spaces = @letter.ord - 'A'.ord
-    " " * number_of_spaces
+    SPACE * number_of_spaces
   end
 
   def second_half
@@ -42,11 +45,11 @@ class DiamondBuilder
 
   def build_line_for(current_letter)
     number_of_spaces = @letter.ord - current_letter.ord
-    spaces = " " * number_of_spaces
-    spaces + current_letter + spaces + "\n"
+    spaces = SPACE * number_of_spaces
+    spaces + current_letter + spaces + NEW_LINE
   end
 
   def remove_trailing_spaces_from(result)
-    result.split("\n").map{ |l| l.rstrip }.join("\n")
+    result.split(NEW_LINE).map{ |l| l.rstrip }.join(NEW_LINE)
   end
 end
