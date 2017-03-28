@@ -12,11 +12,14 @@ class DiamondBuilder
   end
 
   def build
-    result = first_half + middle_line + second_half
-    remove_trailing_spaces_from(result).join(NEW_LINE) + NEW_LINE
+    compose(first_half + middle_line + second_half)
   end
 
   private
+
+  def compose(lines)
+    remove_trailing_spaces_from(lines).join(NEW_LINE) + NEW_LINE
+  end
 
   def first_half
     ('A'...@letter).map do |current_letter|
@@ -52,7 +55,7 @@ class DiamondBuilder
     padding = SPACE * padding_width
   end
 
-  def remove_trailing_spaces_from(result)
-    result.map{ |line| line.rstrip }
+  def remove_trailing_spaces_from(lines)
+    lines.map{ |line| line.rstrip }
   end
 end
