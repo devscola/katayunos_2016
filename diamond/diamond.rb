@@ -23,9 +23,7 @@ class DiamondBuilder
 
   def first_half
     ('A'...@letter).map do |current_letter|
-      number_of_spaces = @letter.ord - current_letter.ord
-      spaces = " " * number_of_spaces
-      spaces + current_letter + spaces + "\n"
+      build_line_for(current_letter)
     end.join
   end
 
@@ -40,6 +38,12 @@ class DiamondBuilder
 
   def second_half
     first_half.reverse
+  end
+
+  def build_line_for(current_letter)
+    number_of_spaces = @letter.ord - current_letter.ord
+    spaces = " " * number_of_spaces
+    spaces + current_letter + spaces + "\n"
   end
 
   def remove_trailing_spaces_from(result)
