@@ -1,10 +1,6 @@
 def diamond_for(letter)
-  if letter == 'A'
-    "#{letter}\n"
-  else
-    builder = DiamondBuilder.new(letter)
-    builder.build
-  end
+  builder = DiamondBuilder.new(letter)
+  builder.build
 end
 
 class DiamondBuilder
