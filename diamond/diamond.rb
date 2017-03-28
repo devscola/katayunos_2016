@@ -35,8 +35,8 @@ class DiamondBuilder
   end
 
   def gap
-    number_of_spaces = @letter.ord - 'A'.ord
-    SPACE * number_of_spaces
+    gap_width = @letter.ord - 'A'.ord
+    SPACE * gap_width
   end
 
   def second_half
@@ -44,9 +44,9 @@ class DiamondBuilder
   end
 
   def build_line_for(current_letter)
-    number_of_spaces = @letter.ord - current_letter.ord
-    spaces = SPACE * number_of_spaces
-    spaces + current_letter + spaces + NEW_LINE
+    padding_width = @letter.ord - current_letter.ord
+    padding = SPACE * padding_width
+    padding + current_letter + padding + NEW_LINE
   end
 
   def remove_trailing_spaces_from(result)
