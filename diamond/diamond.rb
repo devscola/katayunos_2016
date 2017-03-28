@@ -22,7 +22,11 @@ class DiamondBuilder
   private
 
   def first_half
-    " A \n"
+    ('A'...@letter).map do |current_letter|
+      number_of_spaces = @letter.ord - current_letter.ord
+      spaces = " " * number_of_spaces
+      spaces + current_letter + spaces + "\n"
+    end.join
   end
 
   def middle_line
