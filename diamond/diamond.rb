@@ -37,12 +37,13 @@ class DiamondBuilder
 
   def build_line_for(current_letter)
     padding = padding_for(current_letter)
-    if current_letter == 'A'
-      padding + current_letter + padding
-    else
-      gap = gap_for(current_letter)
-      padding + current_letter + gap + current_letter + padding
-    end
+    padding + body_for(current_letter) + padding
+  end
+
+  def body_for(current_letter)
+    return current_letter if current_letter == 'A'
+    gap = gap_for(current_letter)
+    current_letter + gap + current_letter
   end
 
   def gap_for(current_letter)
