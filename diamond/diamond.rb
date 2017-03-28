@@ -15,14 +15,18 @@ class DiamondBuilder
   end
 
   def build
-    result = first_half + gap + second_half
+    result = first_half + middle_line + second_half
     remove_trailing_spaces_from(result) + "\n"
   end
 
   private
 
   def first_half
-    " A \n#{@letter}"
+    " A \n"
+  end
+
+  def middle_line
+    @letter + gap + @letter
   end
 
   def gap
