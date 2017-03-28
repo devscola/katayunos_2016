@@ -22,7 +22,7 @@ class DiamondBuilder
   end
 
   def first_half
-    (INITIAL_LETTER...@letter).map do |current_letter|
+    @first_half ||= (INITIAL_LETTER...@letter).map do |current_letter|
       build_line_for(current_letter)
     end
   end
