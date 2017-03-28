@@ -34,7 +34,8 @@ class DiamondBuilder
   end
 
   def gap
-    " "
+    number_of_spaces = @letter.ord - 'A'.ord
+    " " * number_of_spaces
   end
 
   def second_half
