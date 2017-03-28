@@ -44,9 +44,13 @@ class DiamondBuilder
   end
 
   def build_line_for(current_letter)
+    padding = padding_for(current_letter)
+    padding + current_letter + padding + NEW_LINE
+  end
+
+  def padding_for(current_letter)
     padding_width = @letter.ord - current_letter.ord
     padding = SPACE * padding_width
-    padding + current_letter + padding + NEW_LINE
   end
 
   def remove_trailing_spaces_from(result)
