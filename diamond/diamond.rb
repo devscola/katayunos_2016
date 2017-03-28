@@ -31,12 +31,7 @@ class DiamondBuilder
   end
 
   def middle_line
-    @letter + gap + @letter
-  end
-
-  def gap
-    gap_width = @letter.ord - 'A'.ord
-    SPACE * gap_width
+    build_line_for(@letter).chomp
   end
 
   def second_half
@@ -44,8 +39,18 @@ class DiamondBuilder
   end
 
   def build_line_for(current_letter)
+    gap = gap_for(current_letter)
     padding = padding_for(current_letter)
-    padding + current_letter + padding + NEW_LINE
+    if current_letter == 'A'
+      padding + current_letter + padding + NEW_LINE
+    else
+      padding + current_letter + gap + current_letter + padding + NEW_LINE
+    end
+  end
+
+  def gap_for(current_letter)
+    gap_width = current_letter.ord - 'A'.ord
+    SPACE * gap_width
   end
 
   def padding_for(current_letter)
