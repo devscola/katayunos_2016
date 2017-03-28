@@ -71,7 +71,11 @@ class DiamondBuilder
     end
 
     def gap_width
-      2 * (@current_letter.ord - INITIAL_LETTER.ord) - 1
+      odd_number(@current_letter.ord - INITIAL_LETTER.ord)
+    end
+
+    def odd_number(ordinal)
+      2 * ordinal - 1
     end
 
     def body
