@@ -1,11 +1,9 @@
 def diamond_for(letter)
   if letter == 'A'
     "#{letter}\n"
-  elsif letter == 'B'
+  else
     builder = DiamondBuilder.new(letter)
     builder.build
-  else
-    "  A\n B B\n#{letter}   #{letter}\n B B\n  A\n"
   end
 end
 
@@ -39,17 +37,17 @@ class DiamondBuilder
   end
 
   def build_line_for(current_letter)
-    gap = gap_for(current_letter)
     padding = padding_for(current_letter)
     if current_letter == 'A'
       padding + current_letter + padding + NEW_LINE
     else
+      gap = gap_for(current_letter)
       padding + current_letter + gap + current_letter + padding + NEW_LINE
     end
   end
 
   def gap_for(current_letter)
-    gap_width = current_letter.ord - 'A'.ord
+    gap_width = 2 * (current_letter.ord - 'A'.ord) - 1
     SPACE * gap_width
   end
 
